@@ -20,24 +20,35 @@
         input[type="text"] {
             padding: 5px;
             width: 200px;
-            border: 1px solid transparent;
+            margin-right: 10px;
+            border-radius: 5px;
         }
         
         input[type="text"]:hover {
             padding: 6px;
             width: 210px;
-            border: 1px solid gray;
-            border-bottom: solid gray;
         }
         table {
             width: 800px;
             margin-top: 20px;
-            border-collapse: collapse;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 8px;
+            overflow: hidden;
         }
         th, td {
             padding: 10px;
             text-align: center;
-            border: 1px solid lightgray;
+        }
+        th, td {
+            border-top: 1px solid lightgray;
+            border-bottom: 1px solid lightgray;
+        }
+        th:first-child, td:first-child {
+            border-left: 1px solid lightgray;
+        }
+        th:last-child, td:last-child {
+            border-right: 1px solid lightgray;
         }
         th.colApagar, td.colApagar {
             width: 80px; 
@@ -50,22 +61,27 @@
             padding: 6px 10px;
         }
         .botaum {
-            background: transparent;
+            background: green;
+            color: white;
             border: transparent;
-        }
-        .bordaEsq {
-            border-left: 1px solid lightgray;
+            border-radius: 5px;
+
         }
         .botaoRemover {
-            background-color:transparent;
-            color:red;
+            background-color: transparent;
+            color: red;
             border: none;
             width: 100%;
             height: 100%;
             cursor: pointer;
         }
         .botaoRemover:hover {
-            background-color: navy;
+            font-weight: bold;
+        }
+        tbody tr:hover {
+            transform: scale(1.02);
+            transition: transform 0.2s ease;
+            background-color: #f0f0f0;
         }
     </style>
 </head>
@@ -73,7 +89,7 @@
     <div class="container">
         <div class="cabeca">
             <input type="text" id="textoEntrada" placeholder="Digite algo...">
-            <button class="botaum" onclick="adicionarLinha()">Enviar</button>
+            <button class="botaum" onclick="adicionarLinha()">ADD+</button>
         </div>
         <div>
             <table>
