@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campo de Texto com Botão</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .cabeca {
+            display: flex;
+        }
+        
+        input[type="text"] {
+            padding: 5px;
+            width: 200px;
+            border: 1px solid transparent;
+        }
+        
+        input[type="text"]:hover {
+            padding: 6px;
+            width: 210px;
+            border: 1px solid gray;
+            border-bottom: solid gray;
+        }
+        table {
+            width: 800px;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid lightgray;
+        }
+        th.colApagar, td.colApagar {
+            width: 80px; 
+        }
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        button:hover {
+            padding: 6px 10px;
+        }
+        .botaum {
+            background: transparent;
+            border: transparent;
+        }
+        .bordaEsq {
+            border-left: 1px solid lightgray;
+        }
+        .botaoRemover {
+            background-color:transparent;
+            color:red;
+            border: none;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+        .botaoRemover:hover {
+            background-color: navy;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="cabeca">
+            <input type="text" id="textoEntrada" placeholder="Digite algo...">
+            <button class="botaum" onclick="adicionarLinha()">Enviar</button>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th class="colApagar">#</th>
+                        <th colspan="3">Descrição</th>
+                        <th class="colApagar">Apagar</th>
+                    </tr>
+                </thead>
+                <tbody id="corpoTabela">
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function adicionarLinha() {
+            const textoEntrada = document.getElementById("textoEntrada").value;
+            if (textoEntrada === "") return;
+
+            const corpoTabela = document.getElementById("corpoTabela");
+            const novaLinha = document.createElement("tr");
+
+            const celulaNumero = document.createElement("td");
+            celulaNumero.textContent = corpoTabela.rows.length + 1;
+            novaLinha.appendChild(celulaNumero);
+
+            const celulaDescricao = document.createElement("td");
+            celulaDescricao.colSpan = 3;
+            celulaDescricao.textContent = textoEntrada;
+            novaLinha.appendChild(celulaDescricao);
+
+            const celulaExcluir = document.createElement("td");
+            celulaExcluir.classList.add("colApagar");
+            const botaoExcluir = document.createElement("button");
+            botaoExcluir.textContent = "Remover";
+            botaoExcluir.classList.add("botaoRemover");
+            botaoExcluir.onclick = function () {
+                corpoTabela.removeChild(novaLinha);
+            };
+            celulaExcluir.appendChild(botaoExcluir);
+            novaLinha.appendChild(celulaExcluir);
+
+            corpoTabela.appendChild(novaLinha);
+            document.getElementById("textoEntrada").value = "";
+        }
+    </script>
+</body>
+</html>
